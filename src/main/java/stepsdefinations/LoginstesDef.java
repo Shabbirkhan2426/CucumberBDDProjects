@@ -10,17 +10,34 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class LoginstesDef {
+
 
     WebDriver driver;
 
     @Before
 
-    public void beforeHook(){
+    public void beforeHook() throws MalformedURLException {
 
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        DesiredCapabilities caps = new DesiredCapabilities();
+
+        caps.setCapability("os", "Windows");
+        caps.setCapability("os_version", "10");
+        caps.setCapability("browser", "Chrome");
+        caps.setCapability("browser_version", "80");
+        caps.setCapability("name", "shabbkhan1's First Test");
+
+        driver = new RemoteWebDriver(
+                new URL( "https://shabbkhan1:TameqVjxyVw79QxAbPDh@hub-cloud.browserstack.com/wd/hub"),caps);
+
+        //WebDriverManager.chromedriver().setup();
+        //driver = new ChromeDriver();
     }
 
 
@@ -122,12 +139,25 @@ public class LoginstesDef {
         Assert.assertEquals("Amazon.com: Online Shopping for Electronics, Apparel, Computers, Books, DVDs & more",title);
 
     }*/
-    @Then("User should be on  homepage")
+   /* @Then("User should be on  homepage")
     public void user_should_be_on_homepage() throws InterruptedException {
         String title = driver.getTitle();
         System.out.println("Home page title is "+ title);
         Assert.assertEquals("Amazon.com: Online Shopping for Electronics, Apparel, Computers, Books, DVDs & more",title);
         Thread.sleep(3000);
+    }*/
+
+    /*@Then("I wait {int} seconds")
+    public void i_wait_seconds(Integer intOne) throws Exception{
+        System.out.println("Waiting " + intOne + " seconds");
+        Thread.sleep(intOne*1000);
+    }*/
+    @Then("I wait for {int} seconds")
+    public void i_wait_for_seconds(Integer int1) throws InterruptedException {
+
+        System.out.println("Waiting " + int1 + " seconds");
+        Thread.sleep(int1*1000);
+
     }
 
     @After

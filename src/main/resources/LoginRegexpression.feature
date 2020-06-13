@@ -7,5 +7,6 @@ Feature: Amazon Login feature
     When User   enters username
     And User clicks on Continue
     And  User enter password
-    When User clicks on Sign in button
-    Then User should be on  homepage
+    And  User clicks on Sign in button
+    Then I wait for 5 seconds
+    #Then User should be on  homepage
